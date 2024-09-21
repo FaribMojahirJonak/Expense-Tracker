@@ -68,6 +68,7 @@ class _ExpensesState extends State<Expenses> {
   ];
   @override
   Widget build(BuildContext context) {
+    final width = MediaQuery.of(context).size.width;
     Widget mainContent = const Center(
       child: Text('No expense found, try adding some now'),
     );
@@ -86,15 +87,27 @@ class _ExpensesState extends State<Expenses> {
               onPressed: _openAddExpenseOverlay, icon: const Icon(Icons.add)),
         ],
       ),
-      body: Column(
-        children: [
-          Chart(expenses: _expenseList),
-          Expanded(
-            child:
-                mainContent, //column inside a column throws an error. to fix Expanded() is used
-          )
-        ],
-      ),
+      body: width < 600
+          ? Column(
+              children: [
+                Chart(expenses: _expenseList),
+                Expanded(
+                  child:
+                      mainContent, //column inside a column throws an error. to fix Expanded() is used
+                )
+              ],
+            )
+          : Row(
+              children: [
+                Expanded(
+                  child: Chart(expenses: _expenseList),
+                ),
+                Expanded(
+                  child:
+                      mainContent, //column inside a column throws an error. to fix Expanded() is used
+                )
+              ],
+            ),
     );
   }
 }

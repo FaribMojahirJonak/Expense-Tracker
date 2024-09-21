@@ -13,15 +13,21 @@ class ExpenseItem extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
+            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 15),
             child: Text(expenses.title),
           ),
           Row(
             children: [
-              Text('\$${expenses.amount.toStringAsFixed(2)}'),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 10),
+                child: Text('\$${expenses.amount.toStringAsFixed(2)}'),
+              ),
               const Spacer(),
               Icon(categoryIcons[expenses.category]),
-              Text(expenses.formattedDate),
+              Padding(
+                padding: const EdgeInsets.only(right: 10),
+                child: Text(expenses.formattedDate),
+              ),
               
             ],
           ),
